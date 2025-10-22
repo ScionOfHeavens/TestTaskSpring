@@ -1,0 +1,38 @@
+server:
+  port: 8080   # Порт приложения
+
+jwt:
+  secret: MySuperSecretKey1234567890
+  expiration: 3600000
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/bankdb
+    username: postgres
+    password: root
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        default_schema: public
+        show_sql: true
+        format_sql: true
+  sql:
+    init:
+      mode: always
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+  docker:
+    compose:
+      enabled: false
+  liquibase:
+    change-log: classpath:db/migration/db.changelog-master.xml
+    enabled: false
+
+logging:
+  level:
+    org.springframework: INFO
+    com.bank: DEBUG
